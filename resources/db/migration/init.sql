@@ -1,4 +1,4 @@
-CREATE TABLE phone (
-    id INTEGER PRIMARY KEY,
-    phone TEXT NOT NULL UNIQUE
+CREATE TABLE contact(
+    id       INTEGER PRIMARY KEY,
+    name     TEXT    NOT NULL
 );
