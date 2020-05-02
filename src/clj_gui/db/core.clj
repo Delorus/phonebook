@@ -1,8 +1,11 @@
 (ns clj-gui.db.core
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.java.io :as io]))
 
 (def ^:const db {:name "phones.db"
                  :type "sqlite"})
+
+(defn exist-db? [] (.exists (io/file (:name db))))
 
 (defn id? [id] (integer? id))
 
