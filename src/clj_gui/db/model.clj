@@ -50,4 +50,14 @@
   {:pre [(id? contact-id)]}
   (delete contact (where {:id contact-id})))
 
+
+(defn load-contacts [offset limit]
+  {:pre [(integer? offset) (integer? limit)]}
+  (select contact
+          (with phone)
+          (fields :id)
+          (korma.core/limit limit)
+          (korma.core/offset offset)
+          (order :name)))
+
 ;(defn find-contact-by-phone [phone-pattern])

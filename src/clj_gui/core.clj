@@ -1,8 +1,11 @@
 (ns clj-gui.core
   (:use [seesaw core table]
         [clj-gui.db.core])
-  (:require [clj-gui.gui :as gui]
-            [clj-gui.db.migration :as migration]))
+  (:require [clj-gui.gui.components :as comp]
+            [clj-gui.gui.core :as gui]
+            [clj-gui.db.migration :as migration]
+            [clj-gui.util :as util]
+            [clj-gui.db.model :as model]))
 
 (defn- prepare-db! []
   (when (not (exist-db?))
@@ -13,9 +16,10 @@
 
 (defn -main []
   (prepare-db!)
-  (show! (gui/main-frame "Viewer"
-                         (border-panel
-                           :center (gui/data-table (gui/gen-data 100))
-                           :south (gui/state-row log)))))
+  (show! (comp/main-frame "Viewer"
+                          (border-panel
+                            :center (comp/data-table
+                                      (gui/format-contacts (model/load-contacts 0 100)))
+                            :south (comp/state-row log)))))
 
 
