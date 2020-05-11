@@ -1,11 +1,16 @@
 (ns clj-gui.gui.components
-  (:use [seesaw core table]))
+  (:use [seesaw core table border]))
 
 (defn state-row [bind-atom]
   (let [row (label :id :sel :text @bind-atom :preferred-size [0 :by 14])]
     (add-watch bind-atom :state-bind #(config! row :text %4))
     row))
 
+
+(defn tool-panel []
+  (border-panel
+    :east (button :text "Добавить")
+    :border (line-border :bottom 1)))
 
 (defn data-table [init-rows]
   (scrollable (table :id :data-table
